@@ -20,4 +20,8 @@ package cpu_types;
     ALU_SLTU = 4'b1010
 
 } alu_opcode_t;
+
+typedef enum logic [6:0] {
+
+} instruction_opcode_t;
 endpackage
