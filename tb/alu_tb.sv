@@ -38,6 +38,26 @@ module alu_tb;
         operand_b_tb = 4'b1111;
         alu_operation_tb = ALU_XOR; //0101
         #10
+        operand_a_tb = 8'b10101100; //0A0C
+        operand_b_tb = 8'b00000101; //5
+        alu_operation_tb = ALU_SLL; //0800
+        #10
+        operand_a_tb = 8'b10111010; //BA
+        operand_b_tb = 8'b00000111; //7
+        alu_operation_tb = ALU_SRL; //1
+        #10
+        operand_a_tb = 8'b10110100; //B4
+        operand_b_tb = 8'b00000010; //2
+        alu_operation_tb = ALU_SRA; // 2D
+        #10
+        operand_a_tb = 4'b0000; //0
+        operand_b_tb = 4'b0010; //2
+        alu_operation_tb = ALU_SLT; //1
+        #10
+        operand_a_tb = 9'b111110000; //-16
+        operand_b_tb = 9'b111101100; //-20
+        alu_operation_tb = ALU_SLTU; //0
+        #10
         $finish;
     end
 
