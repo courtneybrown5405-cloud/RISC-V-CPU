@@ -1,0 +1,137 @@
+#! /usr/local/bin/vvp
+:ivl_version "11.0 (stable)" "(v11_0-132-gb2f2414f4)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/lib/ivl/v2009.vpi";
+S_0x6354bfa30600 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x6354bfa25680 .scope package, "cpu_types" "cpu_types" 3 1;
+ .timescale 0 0;
+enum0x6354bf9fb1e0 .enum4 (7)
+   "OPCODE_R_TYPE" 7'b0110011
+ ;
+enum0x6354bf9fa6f0 .enum4 (4)
+   "ALU_NOP" 4'b0000,
+   "ALU_ADD" 4'b0001,
+   "ALU_SUB" 4'b0010,
+   "ALU_AND" 4'b0011,
+   "ALU_OR" 4'b0100,
+   "ALU_XOR" 4'b0101,
+   "ALU_SLL" 4'b0110,
+   "ALU_SRL" 4'b0111,
+   "ALU_SRA" 4'b1000,
+   "ALU_SLT" 4'b1001,
+   "ALU_SLTU" 4'b1010
+ ;
+S_0x6354bfa25810 .scope module, "decode_tb" "decode_tb" 4 2;
+ .timescale -9 -9;
+v0x6354bfa52c40_0 .net "instr_funct3_tb", 2 0, v0x6354bfa2d5a0_0;  1 drivers
+v0x6354bfa52d20_0 .net "instr_funct7_tb", 6 0, v0x6354bfa526d0_0;  1 drivers
+v0x6354bfa52dc0_0 .net "instr_opcode_tb", 6 0, v0x6354bfa52790_0;  1 drivers
+v0x6354bfa52e60_0 .var "instr_tb", 31 0;
+v0x6354bfa52f30_0 .net "reg_dest_tb", 4 0, v0x6354bfa52870_0;  1 drivers
+v0x6354bfa53020_0 .net "reg_source1_tb", 4 0, v0x6354bfa529a0_0;  1 drivers
+v0x6354bfa530f0_0 .net "reg_source2_tb", 4 0, v0x6354bfa52a80_0;  1 drivers
+S_0x6354bfa259a0 .scope module, "decode_instance" "decode" 4 14, 5 3 0, S_0x6354bfa25810;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "instr";
+    .port_info 1 /OUTPUT 7 "instr_opcode";
+    .port_info 2 /OUTPUT 5 "reg_dest";
+    .port_info 3 /OUTPUT 5 "reg_source1";
+    .port_info 4 /OUTPUT 5 "reg_source2";
+    .port_info 5 /OUTPUT 3 "instr_funct3";
+    .port_info 6 /OUTPUT 7 "instr_funct7";
+v0x6354bf9e8d90_0 .net "instr", 31 0, v0x6354bfa52e60_0;  1 drivers
+v0x6354bfa2d5a0_0 .var "instr_funct3", 2 0;
+v0x6354bfa526d0_0 .var "instr_funct7", 6 0;
+v0x6354bfa52790_0 .var "instr_opcode", 6 0;
+v0x6354bfa52870_0 .var "reg_dest", 4 0;
+v0x6354bfa529a0_0 .var "reg_source1", 4 0;
+v0x6354bfa52a80_0 .var "reg_source2", 4 0;
+E_0x6354bfa0b7b0/0 .event edge, v0x6354bf9e8d90_0, v0x6354bf9e8d90_0, v0x6354bf9e8d90_0, v0x6354bf9e8d90_0;
+E_0x6354bfa0b7b0/1 .event edge, v0x6354bf9e8d90_0, v0x6354bf9e8d90_0;
+E_0x6354bfa0b7b0 .event/or E_0x6354bfa0b7b0/0, E_0x6354bfa0b7b0/1;
+    .scope S_0x6354bfa259a0;
+T_0 ;
+Ewait_0 .event/or E_0x6354bfa0b7b0, E_0x0;
+    %wait Ewait_0;
+    %load/vec4 v0x6354bf9e8d90_0;
+    %parti/s 7, 0, 2;
+    %store/vec4 v0x6354bfa52790_0, 0, 7;
+    %pushi/vec4 0, 0, 5;
+    %store/vec4 v0x6354bfa52870_0, 0, 5;
+    %pushi/vec4 0, 0, 5;
+    %store/vec4 v0x6354bfa529a0_0, 0, 5;
+    %pushi/vec4 0, 0, 5;
+    %store/vec4 v0x6354bfa52a80_0, 0, 5;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v0x6354bfa2d5a0_0, 0, 3;
+    %pushi/vec4 0, 0, 7;
+    %store/vec4 v0x6354bfa526d0_0, 0, 7;
+    %load/vec4 v0x6354bfa52790_0;
+    %dup/vec4;
+    %pushi/vec4 51, 0, 7;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x6354bf9e8d90_0;
+    %parti/s 5, 7, 4;
+    %store/vec4 v0x6354bfa52870_0, 0, 5;
+    %load/vec4 v0x6354bf9e8d90_0;
+    %parti/s 5, 15, 5;
+    %store/vec4 v0x6354bfa529a0_0, 0, 5;
+    %load/vec4 v0x6354bf9e8d90_0;
+    %parti/s 5, 20, 6;
+    %store/vec4 v0x6354bfa52a80_0, 0, 5;
+    %load/vec4 v0x6354bf9e8d90_0;
+    %parti/s 3, 12, 5;
+    %store/vec4 v0x6354bfa2d5a0_0, 0, 3;
+    %load/vec4 v0x6354bf9e8d90_0;
+    %parti/s 7, 25, 6;
+    %store/vec4 v0x6354bfa526d0_0, 0, 7;
+    %jmp T_0.1;
+T_0.1 ;
+    %pop/vec4 1;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x6354bfa25810;
+T_1 ;
+    %vpi_call/w 4 4 "$dumpfile", "decode.vcd" {0 0 0};
+    %vpi_call/w 4 5 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x6354bfa25810 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x6354bfa25810;
+T_2 ;
+    %pushi/vec4 1076953267, 0, 32;
+    %store/vec4 v0x6354bfa52e60_0, 0, 32;
+    %delay 2, 0;
+    %vpi_call/w 4 27 "$display", "----R-Type Decode Test ---- \012 Instruction: %b \012 Opcode: %b \012 rd: %b \012 rs1 %b \012 rs2 %b \012 funct3: %b \012 funct7: %b \012", v0x6354bfa52e60_0, v0x6354bfa52dc0_0, v0x6354bfa52f30_0, v0x6354bfa53020_0, v0x6354bfa530f0_0, v0x6354bfa52c40_0, v0x6354bfa52d20_0 {0 0 0};
+    %pushi/vec4 3236019, 0, 32;
+    %store/vec4 v0x6354bfa52e60_0, 0, 32;
+    %delay 2, 0;
+    %vpi_call/w 4 33 "$display", "----R-Type Decode Test ---- \012 Instruction: %b \012 Opcode: %b \012 rd: %b \012 rs1 %b \012 rs2 %b \012 funct3: %b \012 funct7: %b \012", v0x6354bfa52e60_0, v0x6354bfa52dc0_0, v0x6354bfa52f30_0, v0x6354bfa53020_0, v0x6354bfa530f0_0, v0x6354bfa52c40_0, v0x6354bfa52d20_0 {0 0 0};
+    %pushi/vec4 3231923, 0, 32;
+    %store/vec4 v0x6354bfa52e60_0, 0, 32;
+    %delay 2, 0;
+    %vpi_call/w 4 39 "$display", "----R-Type Decode Test ---- \012 Instruction: %b \012 Opcode: %b \012 rd: %b \012 rs1 %b \012 rs2 %b \012 funct3: %b \012 funct7: %b \012", v0x6354bfa52e60_0, v0x6354bfa52dc0_0, v0x6354bfa52f30_0, v0x6354bfa53020_0, v0x6354bfa530f0_0, v0x6354bfa52c40_0, v0x6354bfa52d20_0 {0 0 0};
+    %pushi/vec4 3219635, 0, 32;
+    %store/vec4 v0x6354bfa52e60_0, 0, 32;
+    %delay 2, 0;
+    %vpi_call/w 4 45 "$display", "----R-Type Decode Test ---- \012 Instruction: %b \012 Opcode: %b \012 rd: %b \012 rs1 %b \012 rs2 %b \012 funct3: %b \012 funct7: %b \012", v0x6354bfa52e60_0, v0x6354bfa52dc0_0, v0x6354bfa52f30_0, v0x6354bfa53020_0, v0x6354bfa530f0_0, v0x6354bfa52c40_0, v0x6354bfa52d20_0 {0 0 0};
+    %vpi_call/w 4 48 "$finish" {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 6;
+    "N/A";
+    "<interactive>";
+    "-";
+    "rtl/cpu_types.sv";
+    "tb/decode_tb.sv";
+    "rtl/decode.sv";
