@@ -1,8 +1,8 @@
 import cpu_types::*;
 module alu (
-    input logic [31:0] operand_a,
-    input logic [31:0] operand_b,
-    input alu_opcode_t alu_operation,
+    input logic [31:0] operand_a, //from regfile
+    input logic [31:0] operand_b, //from regfile
+    input alu_opcode_t alu_operation, // from control unit
 
     output logic [31:0] alu_result
 );

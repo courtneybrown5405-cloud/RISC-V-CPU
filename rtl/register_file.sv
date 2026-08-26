@@ -1,11 +1,11 @@
 module register_file (
     input logic clk,
-    input logic [4:0] reg_source1, //rs1
-    input logic [4:0] reg_source2, //rs2
-    input logic [4:0] reg_dest, //rd
+    input logic [4:0] reg_source1, //rs1, from decode
+    input logic [4:0] reg_source2, //rs2, from decode
+    input logic [4:0] reg_dest, //rd, from decode
 
-    input logic [31:0] write_data, 
-    input logic reg_write, 
+    input logic [31:0] write_data, //get from ALU
+    input logic reg_write, //get from control
     
     output logic [31:0] read_data1,
     output logic [31:0] read_data2
