@@ -10,7 +10,10 @@ CPU_RTL = rtl/cpu_types.sv \
 CPU_TB = tb/cpu_tb.sv
 
 cpu_sim: $(CPU_RTL) $(CPU_TB)
-	$(IVERILOG) -g2012 -o cpu_sim $@ $^
+	$(IVERILOG) -g2012 -o $@ $^
 
 run: cpu_sim
 	vvp $<
+
+wave: run
+	gtkwave cpu.vcd
