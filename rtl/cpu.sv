@@ -11,7 +11,7 @@ logic write_en;
 logic [4:0] rd, rs1, rs2;
 logic [6:0] instr_opcode, instr_fct7;
 logic [2:0] instr_fct3;
-logic alu_opcode_t alu_operation;
+alu_opcode_t alu_operation;
 
 register_file Register_File_Module (
     .clk (clk),
