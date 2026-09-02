@@ -1,17 +1,35 @@
 module cpu (
-    input logic clk,
-    input logic [31:0] instruction
+    input wire clk,
+    input wire reset,
+    output wire [31:0] instruction
     
 );
 
+//ALU Signals
 logic [31:0] alu_result;
 logic [31:0] alu_op_a;
 logic [31:0] alu_op_b;
+alu_opcode_t alu_operation;
+
+//Decode/Reg_File Signals 
 logic write_en;
 logic [4:0] rd, rs1, rs2;
 logic [6:0] instr_opcode, instr_fct7;
 logic [2:0] instr_fct3;
-alu_opcode_t alu_operation;
+
+//Instr_Mem + Fetch + PC Signals
+wire [31:0] pc;
+
+instruction_memory Instr_Mem_Module (
+    .pc (pc),
+    .instr(instruction)
+);
+
+program_counter PC_Module (
+    .clk (clk),
+    .reset(reset),
+    .pc (pc)
+);
 
 register_file Register_File_Module (
     .clk (clk),

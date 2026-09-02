@@ -6,11 +6,11 @@ module instruction_memory_tb;
     end
 
     logic [31:0] pc_tb;
-    logic [31:0] instr;
+    logic [31:0] instr_tb;
 
     instruction_memory DUT (
         .pc(pc_tb),
-        .instruction(instr)
+        .inst(instr_tb)
     );
 
     initial begin
@@ -29,7 +29,7 @@ module instruction_memory_tb;
 
         pc_tb = 32'd0;
         #5
-        if (instr == 32'h001101b3) begin
+        if (instr_tb == 32'h001101b3) begin
             $display("PASS: ADD x1, x3, x2");
         end else begin
             $display("FAIL: expected: %0h | actual: %0h",32'h001101b3, instr);
@@ -38,7 +38,7 @@ module instruction_memory_tb;
 
         pc_tb+= 32'd4;
         #5
-        if (instr == 32'h401101b3) begin
+        if (instr_tb == 32'h401101b3) begin
             $display("PASS: SUB x1, x3, x2");
         end else begin
             $display("FAIL: expected: %0h | actual: %0h", 32'h401101b3, instr);
@@ -47,7 +47,7 @@ module instruction_memory_tb;
 
         pc_tb +=32'd4;
         #5
-        if (instr == 32'h001171b3) begin
+        if (instr_tb == 32'h001171b3) begin
             $display("PASS: AND x1, x3, x2");
         end else begin
             $display("FAIL: expected: %0h | actual: %0h", 32'h001171b3, instr);
@@ -56,7 +56,7 @@ module instruction_memory_tb;
 
         pc_tb+= 32'd4;
         #5
-        if (instr == 32'h001161b3) begin
+        if (instr_tb == 32'h001161b3) begin
             $display("PASS: OR x1, x3, x2");
         end else begin
             $display("FAIL: expected: %0h | actual: %0h", 32'h001161b3, instr);

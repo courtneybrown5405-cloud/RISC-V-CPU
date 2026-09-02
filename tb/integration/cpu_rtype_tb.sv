@@ -1,7 +1,7 @@
-module cpu_tb;
+module cpu_rtype_tb;
     initial begin
         $dumpfile("cpu.vcd");
-        $dumpvars(0, cpu_tb);
+        $dumpvars(0, cpu_rtype_tb);
     end
 
     logic clk;
