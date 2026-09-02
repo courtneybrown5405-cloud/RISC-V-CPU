@@ -1,17 +1,19 @@
 module cpu_rtype_tb;
     initial begin
-        $dumpfile("cpu.vcd");
+        $dumpfile("sim/cpu.vcd");
         $dumpvars(0, cpu_rtype_tb);
     end
 
     logic clk;
-    logic [31:0] instruction;
+    logic reset;
+    wire [31:0] instruction_tb;
     logic [31:0] actual;
     logic [31:0] expected;
 
     cpu DUT (
         .clk (clk),
-        .instruction (instruction)
+        .instruction (instruction_tb),
+        .reset(reset)
     );
 
     always #5 clk = ~clk;
@@ -29,7 +31,7 @@ module cpu_rtype_tb;
 
     DUT.Register_File_Module.reg_file[rs1] = value1;
     DUT.Register_File_Module.reg_file[rs2] = value2;
-    instruction = instr;
+    instruction_tb = instr;
     expected = expected_value;
     #10
     actual =  DUT.Register_File_Module.reg_file[rd];
@@ -43,7 +45,7 @@ module cpu_rtype_tb;
 
     initial begin
         clk = 0;
-        instruction = 32'b0;
+        instruction_tb = 32'b0;
         $display("Starting CPU Test..");
 
         //ADD x3, x1, x2

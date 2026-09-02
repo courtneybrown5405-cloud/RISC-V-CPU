@@ -1,6 +1,6 @@
 module cpu_fetch_tb;
     initial begin
-        $dumpfile("cpu_fetch.vcd");
+        $dumpfile("sim/cpu_fetch.vcd");
         $dumpvars(0, cpu_fetch_tb);
     end
 
