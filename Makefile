@@ -12,6 +12,7 @@ CPU_RTL = rtl/cpu_types.sv \
 CPU_RTYPE_TB = tb/integration/cpu_rtype_tb.sv
 CPU_FETCH_TB = tb/integration/cpu_fetch_tb.sv
 CPU_DECODE_TB = tb/integration/cpu_decode_tb.sv
+CPU_DECODE_REGFILE_TB = tb/integration/cpu_decode_regFile_tb.sv
 SIM_DIR = sim
 
 cpu_sim: $(CPU_RTL) $(CPU_TB)
@@ -36,3 +37,8 @@ cpu_rtype: $(CPU_RTL) $(CPU_RTYPE_TB)
 	mkdir -p $(SIM_DIR)
 	$(IVERILOG) -g2012 -o $(SIM_DIR)/cpu_decode_sim $^
 	vvp $(SIM_DIR)/cpu_rtype_sim
+
+cpu_decode_regfile: $(CPU_RTL) $(CPU_DECODE_REGFILE_TB)
+	mkdir -p $(SIM_DIR)
+	$(IVERILOG) -g2012 -o $(SIM_DIR)/cpu_decode_regfile_sim $^
+	vvp $(SIM_DIR)/cpu_decode_regfile_sim
