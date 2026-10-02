@@ -11,11 +11,13 @@ logic [31:0] alu_op_a;
 logic [31:0] alu_op_b;
 alu_opcode_t alu_operation;
 
-//Decode/Reg_File Signals 
+//Decode/Control/Immd_Gen/Reg_File Signals 
 logic write_en;
+logic alu_src;
 logic [4:0] rd, rs1, rs2;
 logic [6:0] instr_opcode, instr_fct7;
 logic [2:0] instr_fct3;
+logic signed [31:0] immd;
 
 //Instr_Mem + Fetch + PC Signals
 wire [31:0] pc;
@@ -46,7 +48,7 @@ alu ALU_Module (
     .alu_result (alu_result),
     .alu_operation (alu_operation),
     .operand_a (alu_op_a),
-    .operand_b (alu_op_b)
+    .operand_b (alu_src ? immd : alu_op_b)
 );
 
 decode Decode_Module (
@@ -64,7 +66,13 @@ control_unit Control_Unit_Module (
     .instr_funct3 (instr_fct3),
     .instr_funct7 (instr_fct7),
     .alu_operation (alu_operation),
-    .reg_write (write_en)
+    .reg_write (write_en),
+    .alu_src (alu_src)
+);
+
+immediate_generator Immd_Gen_Module (
+    .instruction(instruction),
+    .immediate(immd)
 );
 
 endmodule
