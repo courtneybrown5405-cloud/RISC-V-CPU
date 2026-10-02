@@ -20,4 +20,9 @@ package cpu_types;
     ALU_SLTU = 4'b1010
 
 } alu_opcode_t;
+
+typedef enum logic [6:0] {
+    //TODO: Add R-type instruction encoding for opcode 
+    OPCODE_R_TYPE = 7'b0110011
+} instruction_opcode_t;
 endpackage
