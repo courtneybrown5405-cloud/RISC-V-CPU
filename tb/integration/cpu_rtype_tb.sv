@@ -1,17 +1,20 @@
 module cpu_rtype_tb;
     initial begin
-        $dumpfile("cpu.vcd");
+        $dumpfile("sim/cpu.vcd");
         $dumpvars(0, cpu_rtype_tb);
     end
 
     logic clk;
-    logic [31:0] instruction;
+    logic reset;
+    wire [31:0] instruction_tb;
     logic [31:0] actual;
     logic [31:0] expected;
+    integer instr_index = 0;
 
     cpu DUT (
         .clk (clk),
-        .instruction (instruction)
+        .instruction (instruction_tb),
+        .reset(reset)
     );
 
     always #5 clk = ~clk;
@@ -27,23 +30,32 @@ module cpu_rtype_tb;
         input string name
     );
 
-    DUT.Register_File_Module.reg_file[rs1] = value1;
-    DUT.Register_File_Module.reg_file[rs2] = value2;
-    instruction = instr;
-    expected = expected_value;
-    #10
-    actual =  DUT.Register_File_Module.reg_file[rd];
-
-    if (expected == actual) begin
-        $display("PASS: %s x%0d, x%0d, x%0d", name, rd, rs1, rs2);
-    end else begin
-        $display("FAIL:%s | expected: %0d | got: %0d", name, expected, actual);
-    end
+    begin
+        DUT.Register_File_Module.reg_file[rs1] = value1;
+        DUT.Register_File_Module.reg_file[rs2] = value2;
+        DUT.Instr_Mem_Module.instr_memory[instr_index] = instr;
+        expected = expected_value;
+        @(posedge clk);
+        #1
+        actual =  DUT.Register_File_Module.reg_file[rd];
+        if (expected == actual) begin
+            $display("PASS: %s x%0d, x%0d, x%0d", name, rd, rs1, rs2);
+        end else begin
+            $display("FAIL: alu_op: %b  | %s | expected: %0d | got: %0d", DUT.Control_Unit_Module.alu_operation, name, expected, actual);
+        end
+        instr_index++;
+    end    
     endtask
 
     initial begin
         clk = 0;
-        instruction = 32'b0;
+        instr_index = 0;
+        reset = 1;
+
+        @(posedge clk);
+        #1
+        reset = 0;
+
         $display("Starting CPU Test..");
 
         //ADD x3, x1, x2
@@ -57,6 +69,7 @@ module cpu_rtype_tb;
             32'd30,
             "ADD"
         );
+
 
         //SUB x3, x1, x2
         test_r_type(
@@ -166,7 +179,7 @@ module cpu_rtype_tb;
             32'd0,
             "SLTU"
         );
-
+        $display("CPU Test Complete");
         $finish;
     end
 endmodule
