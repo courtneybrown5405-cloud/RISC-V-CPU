@@ -35,7 +35,7 @@ cpu_decode: $(CPU_RTL) $(CPU_DECODE_TB)
 
 cpu_rtype: $(CPU_RTL) $(CPU_RTYPE_TB)
 	mkdir -p $(SIM_DIR)
-	$(IVERILOG) -g2012 -o $(SIM_DIR)/cpu_decode_sim $^
+	$(IVERILOG) -g2012 -o $(SIM_DIR)/cpu_rtype_sim $^
 	vvp $(SIM_DIR)/cpu_rtype_sim
 
 cpu_decode_regfile: $(CPU_RTL) $(CPU_DECODE_REGFILE_TB)

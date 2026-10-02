@@ -24,7 +24,7 @@ always @(*) begin
                 10'b0000000_111: alu_operation = ALU_AND;
                 10'b0000000_001: alu_operation = ALU_SLL;
                 10'b0000000_101: alu_operation = ALU_SRL;
-                10'b1000000_101: alu_operation = ALU_SRA;
+                10'b0100000_101: alu_operation = ALU_SRA;
                 10'b0000000_010: alu_operation = ALU_SLT;
                 10'b0000000_011: alu_operation = ALU_SLTU;
             endcase
