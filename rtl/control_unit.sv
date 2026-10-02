@@ -3,6 +3,7 @@
 
 import cpu_types::*;
 module control_unit (
+    //Get From Decode
     input logic [6:0] instr_opcode,
     input logic [2:0] instr_funct3,
     input logic [6:0] instr_funct7,
