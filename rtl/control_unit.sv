@@ -7,7 +7,7 @@ module control_unit (
 
     output alu_opcode_t alu_operation,
     output logic reg_write,
-    output logic alu_src,
+    output logic alu_src
 );
 
 always @(*) begin

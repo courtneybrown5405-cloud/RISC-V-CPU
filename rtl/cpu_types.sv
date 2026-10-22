@@ -18,13 +18,6 @@ package cpu_types;
     //Comparisons
     ALU_SLT = 4'b1001,
     ALU_SLTU = 4'b1010
-
-    //-----IMMEDIATES ------ //
-    //Arithmetic
-    //Logic
-    //Shifts
-    //Comparisons
-
 } alu_opcode_t;
 
 typedef enum logic [6:0] {

@@ -7,12 +7,20 @@ CPU_RTL = rtl/cpu_types.sv \
  rtl/control_unit.sv \
  rtl/program_counter.sv \
  rtl/instruction_memory.sv \
+ rtl/immediate_generator.sv \
  rtl/cpu.sv
 
 CPU_RTYPE_TB = tb/integration/cpu_rtype_tb.sv
 CPU_FETCH_TB = tb/integration/cpu_fetch_tb.sv
 CPU_DECODE_TB = tb/integration/cpu_decode_tb.sv
 CPU_DECODE_REGFILE_TB = tb/integration/cpu_decode_regFile_tb.sv
+CPU_ITYPE_TB = tb/integration/cpu_itype_tb.sv
+
+IMMD_GEN_RTL = rtl/cpu_types.sv\
+               rtl/immediate_generator.sv
+IMMD_GEN_TB = tb/immediate_generator_tb.sv
+
+
 SIM_DIR = sim
 
 cpu_sim: $(CPU_RTL) $(CPU_TB)
@@ -42,3 +50,14 @@ cpu_decode_regfile: $(CPU_RTL) $(CPU_DECODE_REGFILE_TB)
 	mkdir -p $(SIM_DIR)
 	$(IVERILOG) -g2012 -o $(SIM_DIR)/cpu_decode_regfile_sim $^
 	vvp $(SIM_DIR)/cpu_decode_regfile_sim
+
+cpu_itype: $(CPU_RTL) $(CPU_ITYPE_TB)
+	mkdir -p $(SIM_DIR)
+	$(IVERILOG) -g2012 -o $(SIM_DIR)/cpu_itype_sim $^
+	vvp $(SIM_DIR)/cpu_itype_sim
+
+tb_immd_gen: $(IMMD_GEN_RTL) $(IMMD_GEN_TB)
+	mkdir -p $(SIM_DIR)
+	$(IVERILOG) -g2012 -o $(SIM_DIR)/tb_immd_gen_sim $^
+	vvp $(SIM_DIR)/tb_immd_gen_sim
+	

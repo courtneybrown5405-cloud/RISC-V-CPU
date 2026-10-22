@@ -28,9 +28,9 @@ always_comb begin
         end 
         OPCODE_I_TYPE: begin
             reg_dest = instr[11:7];
-            instr_funct3 = intr[14:12];
-            instr_funct7 = [31:25]
-            reg_source1 = [19:15];
+            instr_funct3 = instr[14:12];
+            instr_funct7 = instr[31:25];
+            reg_source1 = instr[19:15];
         end
     endcase
 end
